@@ -30,4 +30,12 @@ page.onResourceRequested = function(requestData, request) {
     console.log('::loading', requestData['url'], '\n');
 };
 
-page.open('http://taobao.com');
+page.open('http://taobao.com', function() {
+    page.evaluate(function() {
+        var style = document.createElement('style'),
+            text = document.createTextNode('body { background: #fff }');
+        style.setAttribute('type', 'text/css');
+        style.appendChild(text);
+        document.head.insertBefore(style, document.head.firstChild);
+    });
+});
