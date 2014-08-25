@@ -8,8 +8,12 @@ var timeout = null;
 
 var onLoaded = function() {
     console.log('loaded!');
-    page.render('output.png');
-    phantom.exit(0);
+    var succ = page.injectJs('inject.js');
+    console.log(succ);
+    setTimeout(function() {
+        page.render('output.png');
+        phantom.exit(0);
+    }, 1000);
 };
 
 // don't use window.onload
