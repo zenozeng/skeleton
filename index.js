@@ -1,6 +1,12 @@
+
 var page = require('webpage').create();
 
-page.settings.loadImages = false;
+// page.settings.loadImages = false;
+
+// try this when phantomjs2.0 comeout
+// page.settings.loadImages = true;
+// img { -webkit-filter: brightness(0%) ! important; }
+
 
 var isLoading = true;
 var wait = 3000;
@@ -32,8 +38,10 @@ page.onResourceRequested = function(requestData, request) {
 
 page.open('http://taobao.com', function() {
     page.evaluate(function() {
+        var css = 'body { background: #000 };'
+                + 'img { -webkit-filter: brightness(0%) ! important; }';
         var style = document.createElement('style'),
-            text = document.createTextNode('body { background: #fff }');
+            text = document.createTextNode(css);
         style.setAttribute('type', 'text/css');
         style.appendChild(text);
         document.head.insertBefore(style, document.head.firstChild);
