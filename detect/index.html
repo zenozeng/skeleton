@@ -1,0 +1,25 @@
+<!doctype html>
+<meta charset="UTF-8">
+<style>
+body {background: #000 }
+</style>
+<canvas id="canvas"></canvas>
+<script src="detect-colors.js"></script>
+<script src="detect-blocks.js"></script>
+<script>
+ var img = new Image();
+ img.src = "test.png";
+ img.onload = function() {
+     var canvas = document.getElementById("canvas");
+     var ctx = canvas.getContext('2d');
+     var width = this.width / 5;
+     var height = this.height / 5;
+     canvas.width = width;
+     canvas.height = height;
+     ctx.drawImage(img, 0, 0, width, height);
+     var colors = detectColors(ctx.getImageData(0, 0, width, height));
+     console.log(colors);
+     var blocks = detectBlocks(canvas, colors);
+     console.log(blocks);
+ }
+</script>

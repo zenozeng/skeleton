@@ -1,7 +1,7 @@
 
 var page = require('webpage').create();
 
-// page.settings.loadImages = false;
+page.settings.loadImages = false;
 
 // try this when phantomjs2.0 comeout
 // page.settings.loadImages = true;
@@ -36,7 +36,7 @@ page.onResourceRequested = function(requestData, request) {
     console.log('::loading', requestData['url'], '\n');
 };
 
-page.open('http://taobao.com', function() {
+page.open('http://tmall.com', function() {
     page.evaluate(function() {
         var css = 'body { background: #000 };'
                 + 'img { -webkit-filter: brightness(0%) ! important; }';
