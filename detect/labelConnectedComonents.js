@@ -66,4 +66,6 @@ var label = function(data, width, height) {
             groups.push(group);
         });
     });
+
+    return groups;
 };

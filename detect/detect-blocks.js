@@ -7,14 +7,21 @@ var detectBlocks = function(canvas, colors) {
     colors = colors.filter(function(color) {
         return color.weight > 10;
     });
+    var width = canvas.width;
     setInterval(function() {
         // 二值化
         var target = colors[index % colors.length].color;
         var rgb = JSON.parse(target);
+
         index++;
         var color;
+
+        var data = [];
         for(var i = 0, len = pix.length; i < len; i += 4) {
             color = JSON.stringify([pix[i], pix[i+1], pix[i+2]]);
+            var line = (i / 4 / width) | 0;
+            var col = i / 4 - line * width;
+            data[line][col] = color === target ? 1 : 0;
             if(color === target) {
                 tmp[i] = 255;
                 tmp[i+1] = 255;
@@ -28,22 +35,5 @@ var detectBlocks = function(canvas, colors) {
             }
         }
         ctx.putImageData(tmpImageData, 0, 0);
-
-        // 连通区域算法
-
-        var width = canvas.width,
-            height = canvas.height;
-
-        var groups = [];
-
-        // group = {
-        //     1: [0, 100],
-        //     2: ,
-        //     lineNumber: [[start, end], [start, end]]
-        // }
-
-        for(var line = 0; line < height; line++) {
-            
-        }
     }, 5000);
 };
